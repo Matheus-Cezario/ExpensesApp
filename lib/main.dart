@@ -165,6 +165,15 @@ class _MyHomePageState extends State<MyHomePage> {
             TransactionList(
               transactions: _transactions,
               onDelete: _deleteTransaction,
+              onReorder: (int oldIndex, int newIndex) {
+                setState(() {
+                  if (oldIndex < newIndex) {
+                    newIndex -= 1;
+                  }
+                  final item = _transactions.removeAt(oldIndex);
+                  _transactions.insert(newIndex, item);
+                });
+              },
             ),
         ],
       ),

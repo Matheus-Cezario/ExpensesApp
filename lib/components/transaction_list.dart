@@ -1,13 +1,17 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:expenses_app/models/transaction.dart';
 
 class TransactionList extends StatelessWidget {
   final List<Transaction> transactions;
   final void Function(String) onDelete;
+  final void Function(int, int) onReorder;
   const TransactionList({
     super.key,
     required this.transactions,
     required this.onDelete,
+    required this.onReorder,
   });
 
   @override
@@ -15,18 +19,20 @@ class TransactionList extends StatelessWidget {
     return Expanded(
       flex: 2,
       child: transactions.isEmpty
-          ? EmptyList()
+          ? const EmptyList()
           : Padding(
               padding: const EdgeInsets.only(bottom: 6),
-              child: ListView.builder(
+              child: ReorderableListView.builder(
                 itemCount: transactions.length,
                 itemBuilder: (ctx, index) {
                   final tr = transactions[index];
                   return ListItem(
                     tr: tr,
                     onDelete: onDelete,
+                    key: ValueKey(tr.id),
                   );
                 },
+                onReorder: onReorder,
               ),
             ),
     );
@@ -103,7 +109,7 @@ class EmptyList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SizedBox(
+        const SizedBox(
           height: 30,
         ),
         Expanded(
@@ -123,7 +129,7 @@ class EmptyList extends StatelessWidget {
             ],
           ),
         ),
-        SizedBox(
+        const SizedBox(
           height: 30,
         )
       ],
