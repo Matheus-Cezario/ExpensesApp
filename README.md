@@ -1,6 +1,8 @@
-# expenses_app
+# Aplicativo para controle de despesas pessoais
 
-A new Flutter project.
+https://github.com/user-attachments/assets/16db0e75-25fa-4724-9133-dd819175cd19
+
+
 
 ## Getting Started
 
